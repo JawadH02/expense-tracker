@@ -1,9 +1,10 @@
 import _ from "lodash";
-export const getSum = (transaction, type) => {
+
+export function getSum(transaction, type) {
   let sum = _(transaction)
     .groupBy("type")
     .map((objs, key) => {
-      if (!type) return _.sumBy(objs, "amount");
+      if (!type) return _.sumBy(objs, "amount"); // [300, 350, 500]
       return {
         type: key,
         color: objs[0].color,
@@ -11,10 +12,10 @@ export const getSum = (transaction, type) => {
       };
     })
     .value();
-
   return sum;
-};
-export const getLabels = (transaction) => {
+}
+
+export function getLabels(transaction) {
   let amountSum = getSum(transaction, "type");
   let Total = _.sum(getSum(transaction));
 
@@ -23,13 +24,12 @@ export const getLabels = (transaction) => {
     .value();
 
   return percent;
-};
+}
 
-export const chart_Data = (transaction, custom) => {
-
-    let bg = _.map(transaction, a => a.color)
-    bg = _.uniq(bg);
-    let dataValue = getSum(transaction)
+export function chart_Data(transaction, custom) {
+  let bg = _.map(transaction, (a) => a.color);
+  bg = _.uniq(bg);
+  let dataValue = getSum(transaction);
 
   const config = {
     data: {
@@ -49,8 +49,8 @@ export const chart_Data = (transaction, custom) => {
   };
 
   return custom ?? config;
-};
+}
 
-export const getTotal = (transaction) => {
-    return _.sum(getSum(transaction))
+export function getTotal(transaction) {
+  return _.sum(getSum(transaction));
 }
