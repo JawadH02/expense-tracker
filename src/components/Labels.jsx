@@ -2,7 +2,7 @@ import React from "react";
 import { default as api } from "../store/apiSlice";
 import { getLabels } from "../helper/helper";
 
-export default function Labels() {
+export const Labels = () => {
   const { data, isFetching, isSuccess, isError } = api.useGetLabelsQuery();
   let Transactions;
 
@@ -19,7 +19,7 @@ export default function Labels() {
   return <>{Transactions}</>;
 }
 
-function LabelComponent({ data }) {
+const LabelComponent = ({ data }) => {
   if (!data) return <></>;
   return (
     <div className="labels flex justify-between">

@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import List from "./List";
+import { List } from "./List";
 import { default as api } from "../store/apiSlice";
 
-export default function Form() {
+export const Form = () => {
   const { register, handleSubmit, resetField } = useForm();
   const [addTransaction] = api.useAddTransactionMutation();
 
